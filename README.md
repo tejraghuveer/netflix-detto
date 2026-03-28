@@ -12,7 +12,7 @@ A Netflix clone built with HTML, CSS, JavaScript, and Firebase Authentication.
 
 ## Live Demo
 
-**Website:** https://netflix-clone-8c661.web.app
+**Website:** https://helpful-swan-92dd62.netlify.app/
 
 ## Project Structure
 
