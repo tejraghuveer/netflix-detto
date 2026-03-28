@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch movies and TV shows online. Stream the latest releases, trending shows, and classics.">
+    <meta name="keywords" content="movies, TV shows, streaming, Netflix">
+    <meta property="og:title" content="Netflix Clone - Stream Movies & TV Shows">
+    <meta property="og:description" content="Watch your favorite movies and shows">
+    <meta name="robots" content="index, follow">
+    <title>Netflix Clone - Watch Movies Online</title>
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/enhanced.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-background">
+            <img src="https://assets.nflxext.com/ffe/siteui/vlv3/9d3533b2-0e2b-40b2-95e0-50cafc7c3c0f/7e3b9e59-1c2a-4c2b-9b6c-9c8d6b5c1b2a/IN-en-20240311-popsignuptwoweeks-perspective_alpha_website_medium.jpg" alt="background">
+            <div class="login-overlay"></div>
+        </div>
+        <nav class="login-nav">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="login-logo">
+        </nav>
+        <div class="login-container">
+            <form id="login-form" class="login-form">
+                <h1>Sign In</h1>
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Sign In</button>
+                <div class="login-options">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Need help?</a>
+                </div>
+                <div class="signup-link">
+                    <p>New to Netflix? <a href="#" id="show-signup">Sign up now</a></p>
+                </div>
+            </form>
+
+            <form id="signup-form" class="login-form hidden">
+                <h1>Sign Up</h1>
+                <div class="form-group">
+                    <input type="email" id="signup-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Sign Up</button>
+                <div class="signup-link">
+                    <p>Already have an account? <a href="#" id="show-login">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="app-screen" class="app-screen hidden">
+        <!-- Loading State -->
+        <div id="app-loading" class="hidden">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-left">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="nav-logo">
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">New & Popular</a></li>
+                    <li><a href="#">My List</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <i class="fas fa-search nav-icon" id="search-icon"></i>
+                <i class="fas fa-bell nav-icon"></i>
+                <div class="user-profile" id="user-profile-menu">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profile" class="avatar" id="nav-avatar">
+                    <i class="fas fa-caret-down"></i>
+                    <div class="dropdown">
+                        <a href="#" id="switch-profile"><i class="fas fa-users"></i> Switch Profile</a>
+                        <a href="#" id="account-settings"><i class="fas fa-cog"></i> Account</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Banner -->
+        <header class="banner" id="banner">
+            <div class="banner-content">
+                <h1 class="banner-title">Stranger Things</h1>
+                <div class="banner-buttons">
+                    <button class="banner-btn play-btn" onclick="openVideoModal('Stranger Things')">
+                        <i class="fas fa-play"></i> Play
+                    </button>
+                    <button class="banner-btn info-btn" onclick="showMovieInfo('Stranger Things')">
+                        <i class="fas fa-info-circle"></i> More Info
+                    </button>
+                </div>
+                <p class="banner-description">
+                    When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.
+                </p>
+            </div>
+            <div class="banner-fade"></div>
+        </header>
+
+        <!-- Movie Rows -->
+        <div class="movie-rows" id="movie-rows">
+            <!-- Continue Watching Row (Dynamic) -->
+            <div id="continue-watching-row"></div>
+
+            <!-- Recommendations Row (Dynamic) -->
+            <div id="recommendations-row"></div>
+
+            <!-- Because You Watched Row (Dynamic) -->
+            <div id="because-you-watched-row"></div>
+
+            <!-- My List Row (Dynamic) -->
+            <div id="my-list-row"></div>
+
+            <!-- Standard Category Rows (Generated by JS) -->
+            <div id="category-rows"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="social-links">
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Audio Description</a>
+                    <a href="#">Help Center</a>
+                    <a href="#">Gift Cards</a>
+                    <a href="#">Media Center</a>
+                    <a href="#">Investor Relations</a>
+                    <a href="#">Jobs</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Legal Notices</a>
+                    <a href="#">Cookie Preferences</a>
+                    <a href="#">Corporate Information</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <p class="copyright">© 1997-2024 Netflix, Inc.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK (Compat version - works without modules) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/movies.js"></script>
+    <script src="js/profiles.js"></script>
+    <script src="js/recommendations.js"></script>
+    <script src="js/video-player.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth-compat.js"></script>
+
+    <!-- Initialize Database -->
+    <script>
+        const db = firebase.firestore();
+    </script>
+</body>
+</html>
